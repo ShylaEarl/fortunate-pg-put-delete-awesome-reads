@@ -58,10 +58,34 @@ function renderBooks(books) {
       <tr>
         <td>${book.title}</td>
         <td>${book.author}</td>
+        <td><button class="update-book" data-id="${book.id}">I've read this!</button></td>
         <td><button class="delete-book" data-id="${book.id}">Delete Book</button></td>
       </tr>
     `);
   }
+}
+
+//passes book id to PUT/update call
+function bookReadHandler(){
+  isRead($(this).data("id")); //should there be a second param? true?
+}
+
+//PUT request to update that a book has been read
+function isRead(bookId ){ //should there be a second param?
+  $.ajax({
+    method: 'PUT',
+    url: `books/books/isRead/${bookId}`,
+    data:{
+      isRead: true
+    }
+  })
+  .then(function(response) {
+    //refresh book list with new data
+    refreshBooks();
+  })
+  .catch(function(error) {
+    alert('Error on book read.', error);
+  });
 }
 
 function deleteBookHandler(){
