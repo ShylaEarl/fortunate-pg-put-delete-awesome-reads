@@ -8,6 +8,7 @@ function addClickHandlers() {
   $('#submitBtn').on('click', handleSubmit);
 
   // TODO - Add code for edit & delete buttons
+  $('#bookShelf').on('click', '.delete-book', deleteBookHandler)
 }
 
 function handleSubmit() {
@@ -90,7 +91,7 @@ function isRead(bookId ){ //should there be a second param?
 
 function deleteBookHandler(){
   //call AJAX to DELETE this book
-  deleteBook($(this).data("id"))
+  deleteBook($(this).data("id"));
 }
 
 function deleteBook(bookId) {
