@@ -58,7 +58,27 @@ function renderBooks(books) {
       <tr>
         <td>${book.title}</td>
         <td>${book.author}</td>
+        <td><button class="delete-book" data-id="${book.id}">Delete Book</button></td>
       </tr>
     `);
   }
 }
+
+function deleteBookHandler(){
+  //call AJAX to DELETE this book
+  deleteBook($(this).data("id"))
+}
+
+function deleteBook(bookId) {
+  $.ajax({
+      method: 'DELETE',
+      url: `/books/books/${bookId}`,
+  })
+  .then(function (response) {
+      //refresh book list
+      refreshBooks();
+  })
+  .catch(function(error){
+    alert('Error deleting book.', error);
+  });
+}//end deleteBook
