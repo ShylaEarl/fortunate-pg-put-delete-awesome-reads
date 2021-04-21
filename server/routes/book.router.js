@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const pool = require('../modules/pool');
+const pool = require('../modules/pool.js');
 
 // Get all books
 router.get('/', (req, res) => {
